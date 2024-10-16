@@ -7,7 +7,6 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,7 @@ public class HelloWorldConfig {
     @Bean
     public Job helloWorldJob() {
         return jobBuilderFactory.get("helloWorldJob")
-                .incrementer(new RunIdIncrementer())    // 강제로 매번 다른 ID를 실행할 때 파라미터로 부여
+//                .incrementer(new RunIdIncrementer())    // 강제로 매번 다른 ID를 실행할 때 파라미터로 부여 => 매번 다른 파라미터로 실행되서 동일하게 실행해봤자 각 실행 횟수는 별개의 다른 횟수이다.
                 .start(helloWorldStep1())
                 .next(helloWorldStep2())
                 .build();
@@ -55,7 +54,7 @@ public class HelloWorldConfig {
         return (stepContribution, chunkContext) -> {
             System.out.println("헬로월드22222222");
 
-            if (true) {
+            if (false) {
                 throw new Exception("실패 : 헬로월드 태스클릿 2 실패");
             }
             return RepeatStatus.FINISHED;
