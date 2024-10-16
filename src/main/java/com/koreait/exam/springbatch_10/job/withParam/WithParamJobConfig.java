@@ -42,12 +42,12 @@ public class WithParamJobConfig {
     public Tasklet WithParamStep1Tasklet(
             // @Value는 lombok이 아닌 factory.annotation.Value 이다. 주의!
             @Value("#{jobParameters['name']}") String name,
-            @Value("#{jobParameters['age']}") String age
+            @Value("#{jobParameters['age']}") Long age
         ) {
         return (stepContribution, chunkContext) -> {
             log.debug("name : {} age : {}", name, age);
             System.out.println("WithParam111111!!!!");
-            System.out.printf("%s, %s\n", name, age);
+            System.out.printf("%s, %d\n", name, age);
             return RepeatStatus.FINISHED;
             };
     }
