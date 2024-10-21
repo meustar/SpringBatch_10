@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @MappedSuperclass
 @Getter
 @NoArgsConstructor
@@ -23,7 +25,7 @@ import java.util.Map;
 public class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @CreatedDate
